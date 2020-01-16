@@ -1,0 +1,12 @@
+[Unit]
+Description=Let's Encrypt container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/local/bin/docker-compose -f /srv/docker-letsencrypt/docker-compose.yml up
+ExecStop=/usr/local/bin/docker-compose -f /srv/docker-letsencrypt/docker-compose.yml stop
+
+[Install]
+WantedBy=default.target

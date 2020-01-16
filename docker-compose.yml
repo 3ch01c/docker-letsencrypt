@@ -1,0 +1,22 @@
+version: "3"
+services:
+  letsencrypt:
+    image: linuxserver/letsencrypt
+    container_name: letsencrypt
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID
+      - PGID
+      - TZ=Etc/UTC
+      - URL=example.com
+      - SUBDOMAINS=www
+      - VALIDATION=http
+      - EMAIL
+    volumes:
+      - ./config:/config
+      - ./www:/var/www
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
